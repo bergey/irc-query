@@ -2,7 +2,7 @@ Flask==0.10.1
 Jinja2==2.7.3
 MarkupSafe==0.15
 Pygments==2.0.1
-SQLAlchemy==0.7.11
+SQLAlchemy==0.7.10
 Werkzeug==0.9.6
 backports.ssl-match-hostname==3.4.0.2
 itsdangerous==0.24
