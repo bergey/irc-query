@@ -1,21 +1,19 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from tables import Presence
+from tables import Presence, engine
 
 import itertools
 import os
 
 # Connect to DB
-engine = create_engine(os.environ['DATABASE_URL'])
-# Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 fake_data = {
-    '#diagrams': ['bergey', 'byorgey', 'martingale'],
-    '#haskell': ['bergey', 'edwardk', 'jwiegley'],
-    '#nixos': ['jwiegley', 'ocharles', 'fuuzetsu']
+    'diagrams': ['bergey', 'byorgey', 'martingale'],
+    'haskell': ['bergey', 'edwardk', 'jwiegley'],
+    'nixos': ['jwiegley', 'ocharles', 'fuuzetsu']
 }
 
 def insert_presence(ds):
