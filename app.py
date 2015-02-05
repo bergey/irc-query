@@ -19,8 +19,6 @@ def json_demo():
 
 # setup DB session
 # TODO worry about threads & scope
-Base = declarative_base()
-engine = create_engine('postgresql://bergey:password@localhost')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
