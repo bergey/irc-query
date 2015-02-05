@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -11,11 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello You!'
-
-@app.route('/json')
-def json_demo():
-    return json.dumps(['Hello', 'World'])
+    return render_template('index.html')
 
 # setup DB session
 # TODO worry about threads & scope
