@@ -4,9 +4,13 @@ from sqlalchemy.orm import sessionmaker
 from tables import Presence
 
 import itertools
+import os
 
-engine = create_engine('postgresql://bergey:password@localhost')
-Base.metadata.bind = engine
+# Connect to DB
+engine = create_engine(os.environ['DATABASE_URL'])
+# Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
 
 fake_data = {
     '#diagrams': ['bergey', 'byorgey', 'martingale'],
@@ -14,11 +18,11 @@ fake_data = {
     '#nixos': ['jwiegley', 'ocharles', 'fuuzetsu']
 }
 
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
+def insert_presence(ds):
+    presences = [[Presence(channel=c, user_name=n) for n in ns] for c, ns in ds.items()]
+    for p in itertools.chain(*presences):
+        session.add(p)
+    session.commit()
 
-presences = [[Presence(channel=c, user_name=n) for n in ns] for c, ns in fake_data.items()]
-for p in itertools.chain(*presences):
-    session.add(p)
-
-session.commit()
+if len(session.query(Presence).all()) == 0:
+    insert_presence(fake_data)
