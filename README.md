@@ -1,3 +1,8 @@
+## abandoned playground
+
+This code probably doesn't compile.  It probably doesn't do anything
+you want to do.  It's probably full of bugs.
+
 This is a toy project to motivate my learning Flask and SQLAlchemy.
 
 I spend a lot of time on IRC.  My IRC client is configured to hide
